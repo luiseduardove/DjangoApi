@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="{% static 'css/registro.css' %}">
+</head>
+<body>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div id="error-message" class="alert alert-danger">
+                    <h4 class="alert-heading">Error</h4>
+                    {{ message }}
+                </div>
+            {% elif message.tags == "success" %}
+                <div id="success-message" class="alert alert-success">
+                    <h4 class="alert-heading">Éxito</h4>
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="Confirm Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+        
+        <!-- Botón para iniciar sesión movido aquí -->
+        <div class="text-center mt-3">
+            <a href="{% url 'login_vista' %}" class="btn btn-secondary btn-block">Already have an account? Login</a>
+        </div>
+    </form>
+    
+</body>
+</html>
+
+
